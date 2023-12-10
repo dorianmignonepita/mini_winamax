@@ -3,11 +3,20 @@ const router = express.Router();
 
 const db = require("../loaders/mySql");
 const { getMatches, addMatch, deleteMatch } = require('../models/match');
-const { getMatchesByScore, getUpcomings, getMatchesResults, getMatchById, getMatchExist, updateMatchWithQuery } = require('../services/match');
+const { getMatchesByScore, getUpcomings, getMatchesResults, getMatchById, getMatchExist, updateMatchWithQuery, getLives } = require('../services/match');
 
 router.get('/', async (req, res) => {
     try {
         const matches = await getMatches();
+        res.status(200).send(matches);
+    } catch (err) {
+        res.status(400).send(err);
+    }
+});
+
+router.get('/live', async (req, res) => {
+    try {
+        const matches = await getLives();
         res.status(200).send(matches);
     } catch (err) {
         res.status(400).send(err);

@@ -12,8 +12,6 @@ services:
     image: mysql
     restart: unless-stopped
     command: --init-file /data/application/init.sql
-    env_file:
-      - .env
     environment:
       - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
       - MYSQL_DATABASE=$MYSQLDB_DATABASE

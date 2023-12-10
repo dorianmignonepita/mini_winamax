@@ -5,7 +5,7 @@ USE tp_db;
 -- Create the 'users' table
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL
 );
 
 -- Insert data into 'users' table
@@ -41,6 +41,8 @@ INSERT INTO matches (title, competitor1, competitor2, startDate, endDate, homeSc
 -- Create the 'favorites' table
 CREATE TABLE favorites (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT NOT NULL,
+    matchID INT NOT NULL,
     FOREIGN KEY (userID) REFERENCES users(id),
     FOREIGN KEY (matchID) REFERENCES matches(id)
 );
@@ -58,6 +60,7 @@ INSERT INTO favorites (userID, matchID) VALUES
 -- Create the 'users' table
 CREATE TABLE events (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    matchID INT NOT NULL,
     FOREIGN KEY (matchID) REFERENCES matches(id),
     eventDate DATETIME,
     whoScored VARCHAR(50)

@@ -34,6 +34,13 @@ const getUpcomings = async () => {
     return matches;
 };
 
+const getLives = async () => {
+    let matches = await getMatches();
+    const now = new Date();
+    matches = matches.filter(match => (now < (new Date(match.endDate))) && (now > (new Date(match.startDate))));
+    return matches;
+};
+
 const getMatchesResults = async () => {
     const matches = await getMatches();
     let finishedMatches = matches.filter(match => match.homeTeamScore !== null && match.awayTeamScore !== null);
@@ -54,6 +61,7 @@ const getMatchesResults = async () => {
 
 module.exports = {
     getMatchById,
+    getLives,
     getMatchExist,
     updateMatchWithQuery,
     getMatchesByScore,
