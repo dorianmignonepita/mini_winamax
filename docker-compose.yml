@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis
+    ports:
+      - $REDIS_PORT:$REDIS_PORT
+    environment:
+      - REDIS_PASSWORD=$REDIS_PASSWORD
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+  mysqldb:
+    image: mysql
+    restart: unless-stopped
+    command: --init-file /data/application/init.sql
+    env_file:
+      - .env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQLDB_DATABASE
+    ports:
+      - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
+    volumes:
+      - ./db/init.sql:/data/application/init.sql
+      - db-data:/var/lib/mysql
+  backend_api:
+    build: ./my-express-api
+    ports:
+      - 8080:8080
+    command: npm start
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=$REDIS_PORT
+      - REDIS_PASSWORD=$REDIS_PASSWORD
+      - DB_USER=root
+      - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - DB_NAME=$MYSQLDB_DATABASE
+      - DB_PORT=$MYSQLDB_DOCKER_PORT
+      - DB_HOST=mysqldb
+    volumes:
+      - ./my-express-api/src:/code/src:ro
+      - ./my-express-api/package.json:/code/package.json
+      - ./my-express-api/package-lock.json:/code/package-lock.json
+      - back-notused:/opt/app/node_modules
+    depends_on:
+      - redis
+      - mysqldb
+
+volumes:
+  back-notused:
+  db-data:
