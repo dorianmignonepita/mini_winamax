@@ -5,21 +5,12 @@ const getMatches = async () => {
     return matches;
 };
 
-const addMatch = async (opponent, date, homeTeamScore, awayTeamScore) => {
-    await db.query(`INSERT INTO matches (opponent, date, homeTeamScore, awayTeamScore) VALUES ('${opponent}', '${date}', ${homeTeamScore}, ${awayTeamScore});`);
+const getEvents = async () => {
+    const [events] = await db.query('SELECT * FROM events');
+    return events;
 };
-
-const updateMatch = async (id, queryString) => {
-    await db.query(`UPDATE matches SET ${queryString} WHERE id=${id}`);
-};
-
-const deleteMatch = async (id) => {
-    await db.query(`DELETE FROM matches WHERE id=${id}`);
-}
 
 module.exports = {
     getMatches,
-    addMatch,
-    updateMatch,
-    deleteMatch,
+    getEvents,
 }
