@@ -26,7 +26,7 @@ CREATE TABLE matches (
     endDate DATETIME,
     homeScore INT,
     awayScore INT,
-    status ENUM('PREMAT','LIVE','ENDED')
+    status ENUM('PREMATCH','LIVE','ENDED')
 );
 
 -- Insert data into 'matches' table
@@ -36,7 +36,11 @@ INSERT INTO matches (title, competitor1, competitor2, startDate, endDate, homeSc
 ('Quarter-final', 'FC Dijon', 'FC Strasbourg', '2014-12-26T13:30:45', '2014-12-26T14:30:45', 1, 0, 'ENDED'),
 ('Quarter-final', 'FC Pessoux', 'FC Rennes', '2014-11-26T13:30:45', '2014-11-26T14:30:45', 0, 2, 'ENDED'),
 ('Quarter-final', 'FC Toulouse', 'FC Lyon', '2014-12-29T13:30:45', '2014-12-29T14:30:45', 1, 1, 'ENDED'),
-('Quarter-final', 'FC Reims', 'FC Nice', '2017-12-26T13:30:45', '2017-12-26T14:30:45', 0, 1, 'ENDED');
+('Quarter-final', 'FC Reims', 'FC Nice', '2017-12-26T13:30:45', '2017-12-26T14:30:45', 0, 1, 'ENDED'),
+('Eighth-final', 'FC Marseille', 'FC Nantes', NOW(), NOW() + INTERVAL 1 HOUR, 0, 0, 'PREMATCH'),
+('Eighth-final', 'FC Montpellier', 'FC Bordeaux', NOW(), NOW() + INTERVAL 1 HOUR, 0, 0, 'PREMATCH'),
+('Eighth-final', 'FC Lille', 'FC Toulon', NOW(), NOW() + INTERVAL 1 HOUR, 0, 0, 'PREMATCH'),
+('Eighth-final', 'FC Angers', 'FC Brest', NOW(), NOW() + INTERVAL 1 HOUR, 0, 0, 'PREMATCH');
 
 -- Create the 'favorites' table
 CREATE TABLE favorites (
@@ -51,11 +55,16 @@ CREATE TABLE favorites (
 INSERT INTO favorites (userID, matchID) VALUES
 (1, 1),
 (1, 2),
+(1, 7),
+(1, 6),
 (2, 5),
+(2, 8),
 (3, 3),
 (3, 1),
 (3, 4),
-(4, 2);
+(3, 7),
+(4, 2),
+(4, 9);
 
 -- Create the 'users' table
 CREATE TABLE events (

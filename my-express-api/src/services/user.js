@@ -1,4 +1,4 @@
-const { getUsers, getFavorites } = require("../models/user");
+const { getFavorites } = require("../models/user");
 
 const getUserFavorites = async (id) => {
     let favorites = await getFavorites();

@@ -42,7 +42,52 @@ services:
     depends_on:
       - redis
       - mysqldb
+  match_manager_service:
+    build: ./match_manager
+    command: npm start
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=$REDIS_PORT
+      - REDIS_PASSWORD=$REDIS_PASSWORD
+      - DB_USER=root
+      - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - DB_NAME=$MYSQLDB_DATABASE
+      - DB_PORT=$MYSQLDB_DOCKER_PORT
+      - DB_HOST=mysqldb
+    volumes:
+      - ./match_manager/src:/code/src:ro
+      - ./match_manager/package.json:/code/package.json
+      - ./match_manager/package-lock.json:/code/package-lock.json
+      - match-manager-notused:/opt/app/node_modules
+    depends_on:
+      - redis
+      - mysqldb
+      - backend_api
+  notifyer:
+    build: ./notifyer
+    command: npm start
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=$REDIS_PORT
+      - REDIS_PASSWORD=$REDIS_PASSWORD
+      - DB_USER=root
+      - DB_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - DB_NAME=$MYSQLDB_DATABASE
+      - DB_PORT=$MYSQLDB_DOCKER_PORT
+      - DB_HOST=mysqldb
+    volumes:
+      - ./notifyer/src:/code/src:ro
+      - ./notifyer/package.json:/code/package.json
+      - ./notifyer/package-lock.json:/code/package-lock.json
+      - notifyer-notused:/opt/app/node_modules
+    depends_on:
+      - redis
+      - mysqldb
+      - backend_api
+      - match_manager_service
 
 volumes:
   back-notused:
+  match-manager-notused:
+  notifyer-notused:
   db-data:
