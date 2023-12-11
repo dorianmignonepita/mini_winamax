@@ -31,4 +31,26 @@ router.get('/:id/events', async (req, res) => {
     }
 });
 
+router.get('/:id/events/:field', async (req, res) => {
+    try {
+        const events = await getMatchEvents(req.params.id);
+        res.status(200).send(events.map(e => {
+            if(e.hasOwnProperty(req.params.field))
+            {
+                return {
+                    date: e.eventDate,
+                    fieldName: req.params.field,
+                    newStatus: e[req.params.field]
+                }
+            }
+            return {
+                date: e.eventDate,
+                fieldName: req.params.field,
+            }
+        }));
+    } catch (err) {
+        res.status(400).send(err);
+    }
+});
+
 module.exports = router;
