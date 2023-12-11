@@ -4,4 +4,4 @@ setInterval(async () => {
     await emitStartedMatches();
     await emitEndedMatches();
     await emitScoreMatches();
-}, 30000)
+}, 10000)

@@ -56,7 +56,7 @@ const emitScoreMatches = async () => {
     let matches = await getLiveMatches();
     let favorites = await getFavorites();
     matches.map(match => {
-        const random = getRandomInt(3);
+        const random = getRandomInt(7);
         if (random === 1) {
             nrp.emit('matchScore', { id: match.id, whoScored: match.competitor1 });
             favorites.map(fav => 

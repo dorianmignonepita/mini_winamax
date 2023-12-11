@@ -19,7 +19,7 @@ Redis PUB/SUB:
 
 # How To Start
 
-The Notifyer checks the status of all the matches every 30 seconds if a match begins/ends or get a new score, the users who have this match
+The Notifyer checks the status of all the matches every 10 seconds if a match begins/ends or get a new score, the users who have this match
 in their favorite matches will be notified. The LIVE match's events are generated randomly(new-score/no-new-score) every 30 seconds.
 
 The database is setup so we have 4 matches that will start the very moment you start the services.
