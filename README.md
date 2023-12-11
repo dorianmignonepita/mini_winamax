@@ -19,7 +19,7 @@ Redis PUB/SUB:
 
 # How To Start
 
-The Notifyer checks the status of all the matches every 10 seconds if a match begins/ends or get a new score, the users who have this match
+The Notifyer emits to redis the new status of all the matches every 10 seconds(if a match begins/ends or get a new score), the users who have this match
 in their favorite matches will be notified. The LIVE match's events are generated randomly(new-score/no-new-score) every 30 seconds.
 
 The database is setup so we have 4 matches that will start the very moment you start the services.
@@ -52,3 +52,9 @@ http://localhost:8080/users/userId:int/favorites/favoriteId:int
 API permettant de rejouer chaque événement qui a eu lieu sur un match donné
 GET
 http://localhost:8080/matches/matchId:int/events
+
+API permettant de rejouer chaque événement avec un field spécific(status | homeScore | awayScore) qui a eu lieu sur un match donné
+GET
+http://localhost:8080/matches/matchId:int/events/status      OU
+http://localhost:8080/matches/matchId:int/events/homeScore   OU
+http://localhost:8080/matches/matchId:int/events/awayScore
