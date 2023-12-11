@@ -14,8 +14,8 @@ const updateMatch = async (id, queryString) => {
     await db.query(`UPDATE matches SET ${queryString} WHERE id=${id}`);
 };
 
-const addEvent = async (matchID, whoScored) => {
-    await db.query(`INSERT INTO events (matchID, eventDate, whoScored) VALUES (${matchID}, '${new Date().toISOString().split(".")[0]}', "${whoScored}")`);
+const addEvent = async (matchID, homeScore, awayScore, status) => {
+    await db.query(`INSERT INTO events (matchID, eventDate, homeScore, awayScore, status) VALUES (${matchID}, '${new Date().toISOString().split(".")[0]}', ${homeScore}, ${awayScore}, "${status}")`);
 };
 
 module.exports = {

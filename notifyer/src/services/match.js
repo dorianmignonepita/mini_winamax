@@ -61,14 +61,14 @@ const emitScoreMatches = async () => {
             nrp.emit('matchScore', { id: match.id, whoScored: match.competitor1 });
             favorites.map(fav => 
                 fav.matchID == match.id ? 
-                console.log({date: `${new Date()}`, type: "match score notification", sendTo: `user ${fav.userID}`, message: `team ${match.competitor1} scored !`}) 
+                console.log({date: `${new Date()}`, type: `match ${match.id} score notification`, sendTo: `user ${fav.userID}`, message: `team ${match.competitor1} scored !`}) 
                 : null)
         }
         else if (random === 2) {
             nrp.emit('matchScore', { id: match.id, whoScored: match.competitor2 });
             favorites.map(fav => 
                 fav.matchID == match.id ? 
-                console.log({date: `${new Date()}`, type: "match score notification", sendTo: `user ${fav.userID}`, message: `team ${match.competitor1} scored !`}) 
+                console.log({date: `${new Date()}`, type: `match ${match.id} score notification`, sendTo: `user ${fav.userID}`, message: `team ${match.competitor2} scored !`}) 
                 : null
             )
         }
