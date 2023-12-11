@@ -20,6 +20,11 @@ services:
     volumes:
       - ./db/init.sql:/data/application/init.sql
       - db-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 30s
+      retries: 5
   backend_api:
     build: ./my-express-api
     ports:
@@ -81,10 +86,15 @@ services:
       - ./notifyer/package-lock.json:/code/package-lock.json
       - notifyer-notused:/opt/app/node_modules
     depends_on:
-      - redis
-      - mysqldb
-      - backend_api
-      - match_manager_service
+      redis:
+        condition: service_started
+      backend_api:
+        condition: service_started
+      match_manager_service:
+        condition: service_started
+      mysqldb:
+        condition: service_healthy
+    restart: on-failure
 
 volumes:
   back-notused:
