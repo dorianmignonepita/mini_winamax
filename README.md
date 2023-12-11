@@ -1,6 +1,6 @@
 # Docker compose service's description and name:
 
-# Un service permettant d’envoyer des notifications à un user sur ses matchs favoris pour chaque début / fin de match / changement de score Un log avec le type de notification, la lite de user destinataires et le texte suffisent
+`Un service permettant d’envoyer des notifications à un user sur ses matchs favoris pour chaque début / fin de match / changement de score Un log avec le type de notification, la lite de user destinataires et le texte suffisent`
 notifyer
 
 # Un service qui gère l’état d’un match ainsi que ses changements Vous ferez arriver ces changements via un pub/sub redis
