@@ -25,10 +25,14 @@ in their favorite matches will be notified. The LIVE match's events are generate
 The database is setup so we have 4 matches that will start the very moment you start the services.
 
 In order to start the services you just need to use the command:
-1. make up
+```bash
+make up
+``` 
 
-if you can't use "make up" for some reason you can just use the command: "docker compose up" 
-
+if you can't use "make up" for some reason you can just use the command:
+```shell
+docker compose up --build
+```
 
 
 # The API URL:
@@ -58,3 +62,21 @@ GET
 http://localhost:8080/matches/matchId:int/events/status      OU
 http://localhost:8080/matches/matchId:int/events/homeScore   OU
 http://localhost:8080/matches/matchId:int/events/awayScore
+
+# How to test 
+
+on linux or git bash console
+```bash
+./test.sh
+```
+else 
+```shell
+cd match_manager
+npm test
+cd ../my_express_api
+npm test
+cd ../notifyer
+npm test
+```
+
+
