@@ -1,4 +1,4 @@
-const { getMatches } = require("../models/match");
+
 
 var NRP = require('node-redis-pubsub');
 const { getFavorites } = require("../models/user");
@@ -12,25 +12,11 @@ var config = {
 
 var nrp = new NRP(config);
 
-const getNotStartedMatches = async () => {
-    let matches = await getMatches();
-    const now = new Date();
-    matches = matches.filter(match => ((new Date(match.startDate)) < now) && ((new Date(match.endDate)) > now) && (match.status !== "LIVE"));
-    return matches; 
-};
-
-const getNotEndedMatches = async () => {
-    let matches = await getMatches();
-    const now = new Date();
-    matches = matches.filter(match => ((new Date(match.endDate)) <= now) && (match.status !== "ENDED"));
-    return matches; 
-};
-
-const getLiveMatches = async () => {
-    let matches = await getMatches();
-    matches = matches.filter(match => match.status === "LIVE");
-    return matches; 
-};
+const {
+    getNotEndedMatches,
+    getNotStartedMatches,
+    getLiveMatches
+} = require('./matchServiceImpl')
 
 const emitStartedMatches = async () => {
     let matches = await getNotStartedMatches();
@@ -77,9 +63,6 @@ const emitScoreMatches = async () => {
 };
 
 module.exports = {
-    getNotStartedMatches,
-    getNotEndedMatches,
-    getLiveMatches,
     emitEndedMatches,
     emitStartedMatches,
     emitScoreMatches,
