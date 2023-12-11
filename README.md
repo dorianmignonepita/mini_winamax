@@ -1,19 +1,19 @@
 # Docker compose service's description and name:
 
-`Un service permettant d’envoyer des notifications à un user sur ses matchs favoris pour chaque début / fin de match / changement de score Un log avec le type de notification, la lite de user destinataires et le texte suffisent`
-notifyer
+UN SERVICE PERMETTANT D’ENVOYER DES NOTIFICATIONS À UN USER SUR SES MATCHS FAVORIS POUR CHAQUE DÉBUT / FIN DE MATCH / CHANGEMENT DE SCORE UN LOG AVEC LE TYPE DE NOTIFICATION, LA LITE DE USER DESTINATAIRES ET LE TEXTE SUFFISENT
+`notifyer`
 
-# Un service qui gère l’état d’un match ainsi que ses changements Vous ferez arriver ces changements via un pub/sub redis
-match_manager_service
+UN SERVICE QUI GÈRE L’ÉTAT D’UN MATCH AINSI QUE SES CHANGEMENTS VOUS FEREZ ARRIVER CES CHANGEMENTS VIA UN PUB/SUB REDIS
+`match_manager_service`
 
-# Database Mysql
-mysqldb
+DATABASE MYSQL
+`mysqldb`
 
-# Express API
-backend_api
+EXPRESS API
+`backend_api`
 
-# Redis Pub/Sub
-redis
+REDIS PUB/SUB
+`redis`
 
 
 
@@ -33,12 +33,12 @@ if you can't use "make up" for some reason you can just use the command: "docker
 
 # The API URL:
 
-# API renvoyant à l’utilisateur l’ensemble des matchs disponibles à la prise de paris (en gros tous les matchs non terminés)
+API RENVOYANT À L’UTILISATEUR L’ENSEMBLE DES MATCHS DISPONIBLES À LA PRISE DE PARIS (EN GROS TOUS LES MATCHS NON TERMINÉS)
 GET
 http://localhost:8080/matches/available
 
 
-# Une API permettant à un user d’ajouter / retirer un match de ses favoris
+UNE API PERMETTANT À UN USER D’AJOUTER / RETIRER UN MATCH DE SES FAVORIS
 POST
 body: {
     "matchID": number
@@ -49,6 +49,6 @@ http://localhost:8080/users/userId:int/favorites
 DELETE
 http://localhost:8080/users/userId:int/favorites/favoriteId:int
 
-# Une API permettant de rejouer chaque événement qui a eu lieu sur un match donné
+UNE API PERMETTANT DE REJOUER CHAQUE ÉVÉNEMENT QUI A EU LIEU SUR UN MATCH DONNÉ
 GET
 http://localhost:8080/matches/matchId:int/events
