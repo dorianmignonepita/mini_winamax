@@ -1,10 +1,10 @@
 const request = require('supertest');
-const app = require('../src/app');
-const db = require('../src/loaders/mySql');
-const {getUsers, getFavorites, addFavorite, deleteFavorite } = require('../src/models/user')
-const { getUserFavorites } = require('../src/services/user');
+const app = require('../../src/app');
+const db = require('../../src/loaders/mySql');
+const {getUsers, getFavorites, addFavorite, deleteFavorite } = require('../../src/models/user')
+const { getUserFavorites } = require('../../src/services/user');
 
-jest.mock('../src/models/user', () => {
+jest.mock('../../src/models/user', () => {
     return {
         getUsers: jest.fn(),
         getFavorites: jest.fn(),
